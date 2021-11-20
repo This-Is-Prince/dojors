@@ -65,14 +65,68 @@
 //     println!("The value of hello is : {}", hello);
 //     hello
 // }
+// fn main() {
+//     let hello = String::from("Hello");
+//     let (hello, len) = print_hello(hello);
+//     println!("THe value of hello after print is : {}", hello);
+//     println!("THe len of hello is : {}", len);
+// }
+// fn print_hello(hello: String) -> (String, usize) {
+//     println!("The value of hello is : {}", hello);
+//     let len = hello.len();
+//     (hello, len)
+// }
+
+// ==========
+// Borrowing
+// ==========
+
+// fn main() {
+//     let hello = String::from("Hello");
+//     let len = calculate_len(&hello);
+//     println!("The length of string {} is {}", hello, len);
+// }
+// fn calculate_len(hello: &String) -> usize {
+//     hello.len()
+// }
+
+// fn main() {
+//     let mut hello = String::from("Hello");
+//     change(&mut hello);
+//     println!("The value of hello is : {}", hello);
+// }
+// fn change(hello: &mut String) {
+//     hello.push_str("World!");
+// }
+
+// fn main() {
+// let mut s = String::from("Hello");
+// let a = &mut s;
+// let b = &s;//Error
+// let b = &mut s;//Error
+// println!("The value of a and b is : {},{}", a, b);
+// }
+
+// fn main() {
+//     let mut s = String::from("HEllo");
+//     // let r1=&mut s;//Error
+//     {
+//         let r2 = &mut s;
+//         println!("THe value of r2 is : {}", r2);
+//         r2.push_str("World");
+//         println!("The value of r2 after change is : {}", r2);
+//     }
+//     let r1 = &mut s;
+//     println!("The value of r1 is : {}", r1);
+// }
+
 fn main() {
-    let hello = String::from("Hello");
-    let (hello, len) = print_hello(hello);
-    println!("THe value of hello after print is : {}", hello);
-    println!("THe len of hello is : {}", len);
+    let mut s = String::from("Hello");
+    // let r1=&mut s;//Error
+    change(&mut s);
+    let r1 = &mut s;
+    println!("The value of r1 is : {}", r1);
 }
-fn print_hello(hello: String) -> (String, usize) {
-    println!("The value of hello is : {}", hello);
-    let len = hello.len();
-    (hello, len)
+fn change(string: &mut String) {
+    string.push_str(" Bro");
 }
