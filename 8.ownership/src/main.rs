@@ -120,13 +120,18 @@
 //     println!("The value of r1 is : {}", r1);
 // }
 
-fn main() {
-    let mut s = String::from("Hello");
-    // let r1=&mut s;//Error
-    change(&mut s);
-    let r1 = &mut s;
-    println!("The value of r1 is : {}", r1);
-}
-fn change(string: &mut String) {
-    string.push_str(" Bro");
-}
+// fn main() {
+//     let mut s = String::from("Hello");
+//     // let r1=&mut s;//Error
+//     change(&mut s);
+//     let r1 = &mut s;
+//     println!("The value of r1 is : {}", r1);
+// }
+// fn change(string: &mut String) {
+//     string.push_str(" Bro");
+// }
+
+// ============
+// Slice Type
+// ============
+fn main() {}
