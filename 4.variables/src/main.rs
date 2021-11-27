@@ -16,16 +16,41 @@
 //     println!("The value of CONST is : {}", CONST);
 // }
 
+// fn main() {
+//     let x = 5;
+//     let x = x + 1;
+//     {
+//         let x = x * 2;
+//         println!("The value of x is: {}", x);
+//     }
+//     println!("The value of x is: {}", x);
+//     let mut x = "Print";
+//     println!("The value of x is: {}", x);
+//     x = "Hello Bro";
+//     println!("The value of x is: {}", x);
+// }
+
+// fn main() {
+//     let x = 5;
+//     println!("The value of x is : {}", x);
+//     x = x + 1;
+//     println!("The value of x is : {}", x);
+// }
+
+// fn main() {
+//     let mut x = 5;
+//     println!("The value of x is : {}", x);
+//     x = x + 1;
+//     println!("The value of x is : {}", x);
+//     {
+//         x = x * 2;
+//         let x = x * 2;
+//         println!("The value of x is : {}", x);
+//     }
+//     println!("The value of x is : {}", x);
+// }
+
+const PI: f64 = 3.14;
 fn main() {
-    let x = 5;
-    let x = x + 1;
-    {
-        let x = x * 2;
-        println!("The value of x is: {}", x);
-    }
-    println!("The value of x is: {}", x);
-    let mut x = "Print";
-    println!("The value of x is: {}", x);
-    x = "Hello Bro";
-    println!("The value of x is: {}", x);
+    println!("The value of PI is : {}", PI);
 }
