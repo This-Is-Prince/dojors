@@ -79,31 +79,47 @@
 //     );
 // }
 
+// fn main() {
+//     let x: i32 = return_integer();
+//     println!("The value of  x is : {}", x);
+
+//     // let x = [3; 5];
+//     // let x: [f64; 5] = [1.2, 3.2, 3.2, 4.2, 5.5];
+//     // let x: [f64; 5] = [1.2; 5];
+//     // for element in x {
+//     //     println!("The value of element is : {}", element);
+//     // }
+
+//     // for element in 1..5 {
+//     //     println!("The value of element is : {}", element);
+//     // }
+//     // for element in (1..5).rev() {
+//     //     println!("The value of element is : {}", element);
+//     // }
+//     let (x, y, z) = point();
+//     println!("The value of x point is : {}", x);
+//     println!("The value of y point is : {}", y);
+//     println!("The value of z point is : {}", z);
+// }
+// fn return_integer() -> i32 {
+//     5
+// }
+// fn point() -> (i32, i32, i32) {
+//     return (1, 2, 3);
+// }
+
 fn main() {
-    let x: i32 = return_integer();
-    println!("The value of  x is : {}", x);
+    // let tup: (u8, u16, u128) = (4, 5, 65);
+    // println!("The value of tup.0 is {}", tup.0);
+    // println!("The value of tup.1 is {}", tup.1);
+    // println!("The value of tup.2 is {}", tup.2);
+    // let (x, y, z) = (4, 5, 6);
+    // println!("The value of x is {}", x);
+    // println!("The value of y is {}", y);
+    // println!("The value of z is {}", z);
 
-    // let x = [3; 5];
-    // let x: [f64; 5] = [1.2, 3.2, 3.2, 4.2, 5.5];
-    // let x: [f64; 5] = [1.2; 5];
-    // for element in x {
-    //     println!("The value of element is : {}", element);
-    // }
-
-    // for element in 1..5 {
-    //     println!("The value of element is : {}", element);
-    // }
-    // for element in (1..5).rev() {
-    //     println!("The value of element is : {}", element);
-    // }
-    let (x, y, z) = point();
-    println!("The value of x point is : {}", x);
-    println!("The value of y point is : {}", y);
-    println!("The value of z point is : {}", z);
-}
-fn return_integer() -> i32 {
-    5
-}
-fn point() -> (i32, i32, i32) {
-    return (1, 2, 3);
+    let arr = [1, 2, 3, 4];
+    let arr2 = [3; 5];
+    let arr3: [u8; 5];
+    arr3 = [1, 2, 3, 4, 5];
 }
