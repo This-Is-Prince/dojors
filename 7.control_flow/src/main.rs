@@ -121,12 +121,29 @@
 //     }
 // }
 
+// fn main() {
+//     let a = (1..10).rev();
+//     for num in a {
+//         println!("The arr value : {}", num);
+//     }
+//     for number in (1..4).rev() {
+//         println!("{}", number)
+//     }
+// }
+
 fn main() {
-    let a = (1..10).rev();
-    for num in a {
-        println!("The arr value : {}", num);
+    let number = 3;
+    if number < 5 {
+        println!("Condition was true");
+    } else {
+        println!("Condition was false");
     }
-    for number in (1..4).rev() {
-        println!("{}", number)
-    }
+    let hi = if number < 5 {
+        println!("Number is less than 5");
+        1
+    } else {
+        println!("Number is less than 5");
+        2
+    };
+    println!("The value of hi is {}", hi);
 }
