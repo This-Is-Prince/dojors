@@ -91,12 +91,22 @@ fn main() {
     // println!("The value of counter is {}", counter);
     // println!("The value of result is {}", result);
 
-    let mut number = 3;
-    while number != 0 {
-        println!("{}!", number);
-        number -= 1;
+    // let mut number = 3;
+    // while number != 0 {
+    //     println!("{}!", number);
+    //     number -= 1;
+    // }
+    // println!("LIFTOFF!!!")
+
+    let a = [10, 20, 30, 40, 50];
+
+    for element in a.iter() {
+        println!("The value is: {}", element);
     }
-    println!("LIFTOFF!!!")
+
+    for number in 1..4 {
+        println!("The value is: {}", number);
+    }
 }
 
 // fn my_function() {
