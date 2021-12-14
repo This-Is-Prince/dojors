@@ -59,9 +59,13 @@ fn main() {
     //     println!("number is greater than 10");
     // }
 
-    let condition = true;
-    let number = if condition { 1 } else { 0 };
-    println!("The number is {}", number);
+    // let condition = true;
+    // let number = if condition { 1 } else { 0 };
+    // println!("The number is {}", number);
+
+    loop {
+        println!("again!")
+    }
 }
 
 // fn my_function() {
