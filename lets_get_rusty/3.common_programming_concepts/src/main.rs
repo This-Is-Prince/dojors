@@ -49,7 +49,15 @@ fn main() {
     // FUnctions
     // my_function()
     // my_function2(1, 2);
-    println!("The value of return is {}", my_function_return(1, 2));
+    // println!("The value of return is {}", my_function_return(1, 2));
+    let number = 5;
+    if number < 5 {
+        println!("number is less than 5");
+    } else if number < 10 {
+        println!("number is less than 10");
+    } else {
+        println!("number is greater than 10");
+    }
 }
 
 // fn my_function() {
@@ -59,9 +67,9 @@ fn main() {
 //     println!("The value of x is : {}", x);
 //     println!("The value of y is : {}", y);
 // }
-fn my_function_return(x: i32, y: i32) -> i32 {
-    println!("The value of x is : {}", x);
-    println!("The value of y is : {}", y);
-    // return x + y;
-    x + y
-}
+// fn my_function_return(x: i32, y: i32) -> i32 {
+//     println!("The value of x is : {}", x);
+//     println!("The value of y is : {}", y);
+//     // return x + y;
+//     x + y
+// }
