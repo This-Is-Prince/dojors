@@ -50,14 +50,18 @@ fn main() {
     // my_function()
     // my_function2(1, 2);
     // println!("The value of return is {}", my_function_return(1, 2));
-    let number = 5;
-    if number < 5 {
-        println!("number is less than 5");
-    } else if number < 10 {
-        println!("number is less than 10");
-    } else {
-        println!("number is greater than 10");
-    }
+    // let number = 5;
+    // if number < 5 {
+    //     println!("number is less than 5");
+    // } else if number < 10 {
+    //     println!("number is less than 10");
+    // } else {
+    //     println!("number is greater than 10");
+    // }
+
+    let condition = true;
+    let number = if condition { 1 } else { 0 };
+    println!("The number is {}", number);
 }
 
 // fn my_function() {
