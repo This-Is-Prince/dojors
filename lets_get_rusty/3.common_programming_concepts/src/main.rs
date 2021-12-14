@@ -63,9 +63,33 @@ fn main() {
     // let number = if condition { 1 } else { 0 };
     // println!("The number is {}", number);
 
-    loop {
-        println!("again!")
-    }
+    // Loops
+    // loop {
+    //     println!("again!")
+    // }
+
+    // let mut counter = 0;
+    // loop {
+    //     counter += 1;
+    //     if counter == 10 {
+    //         break;
+    //     } else {
+    //         continue;
+    //     }
+    // }
+    // println!("The value of counter is {}", counter);
+
+    let mut counter = 0;
+    let result = loop {
+        counter += 1;
+        if counter == 10 {
+            break counter;
+        } else {
+            continue;
+        }
+    };
+    println!("The value of counter is {}", counter);
+    println!("The value of result is {}", result);
 }
 
 // fn my_function() {
