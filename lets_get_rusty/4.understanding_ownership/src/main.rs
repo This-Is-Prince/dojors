@@ -21,8 +21,8 @@ fn main() {
     /*
     Memory and allocation
     */
-    let x = 5;
-    let y = x; // Copy
+    // let x = 5;
+    // let y = x; // Copy
 
     // let s1 = String::from("Hello");
     // let s2 = s1; // Move (not shallow copy or deep copy)
@@ -32,5 +32,6 @@ fn main() {
     let s1 = String::from("Hello");
     let s2 = s1.clone(); // Cloning
 
-    println!("{}, world!", s1)
+    println!("s1 - > {}, world!", s1);
+    println!("s2 - > {}, world!", s2);
 }
