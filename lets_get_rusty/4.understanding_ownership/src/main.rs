@@ -46,10 +46,25 @@ fn main() {
     // makes_copy(x);
     // println!("{}", x);
 
-    let s1 = gives_ownership();
-    let s2 = String::from("hello2");
-    let s3 = takes_and_gives_back(s2);
-    println!("s1 = {} , s3 = {}", s1, s3);
+    // let s1 = gives_ownership();
+    // let s2 = String::from("hello2");
+    // let s3 = takes_and_gives_back(s2);
+    // println!("s1 = {} , s3 = {}", s1, s3);
+
+    /*
+    References and Borrowing
+    */
+    // let s1 = String::from("Hello");
+    // let (s2, len) = calculate_length(s1);
+    // println!("The length of '{}' is {}.", s2, len);
+
+    // let s1 = String::from("Hello");
+    // let len = calculate_length(&s1);
+    // println!("The length of '{}' is {}.", s1, len);
+
+    let mut s1 = String::from("hello");
+    change(&mut s1);
+    println!("{}", s1);
 }
 // fn takes_ownership(some_string: String) {
 //     println!("{}", some_string);
@@ -57,10 +72,22 @@ fn main() {
 // fn makes_copy(some_integer: i32) {
 //     println!("{}", some_integer);
 // }
-fn gives_ownership() -> String {
-    let some_string = String::from("hello");
-    some_string
-}
-fn takes_and_gives_back(a_string: String) -> String {
-    a_string
+// fn gives_ownership() -> String {
+//     let some_string = String::from("hello");
+//     some_string
+// }
+// fn takes_and_gives_back(a_string: String) -> String {
+//     a_string
+// }
+// fn calculate_length(s: String) -> (String, usize) {
+//     let length = s.len(); //len() returns the length of a string
+//     (s, length)
+// }
+// fn calculate_length(s: &String) -> usize {
+// // s.push_str("oops");// references are immutable by default.
+//     let length = s.len(); //len() returns the length of a string
+//     length
+// }
+fn change(some_string: &mut String) {
+    some_string.push_str(", world")
 }
