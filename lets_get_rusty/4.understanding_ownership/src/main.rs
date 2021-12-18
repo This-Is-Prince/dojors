@@ -62,9 +62,23 @@ fn main() {
     // let len = calculate_length(&s1);
     // println!("The length of '{}' is {}.", s1, len);
 
-    let mut s1 = String::from("hello");
-    change(&mut s1);
-    println!("{}", s1);
+    // let mut s1 = String::from("hello");
+    // change(&mut s1);
+    // println!("{}", s1);
+
+    /*
+    The Slice Type
+     */
+    // let mut s = String::from("hello world");
+    // let word = first_word(&s);
+    // s.clear();
+
+    let mut s = String::from("hello world");
+    // let hello=&s[0..5];
+    let hello = &s[..5];
+    // let world=&s[6..11];
+    let world = &s[6..];
+    let hello_world = &s[..];
 }
 // fn takes_ownership(some_string: String) {
 //     println!("{}", some_string);
@@ -88,6 +102,27 @@ fn main() {
 //     let length = s.len(); //len() returns the length of a string
 //     length
 // }
-fn change(some_string: &mut String) {
-    some_string.push_str(", world")
-}
+// fn change(some_string: &mut String) {
+//     some_string.push_str(", world")
+// }
+
+/*
+The Rule of Reference
+1. At any given time, you can have either one mutable reference or any number of immutable references.
+2. References must always be valid.
+*/
+
+/*
+The Slice Type
+ */
+
+// fn first_word(s: &String) -> usize {
+//     let bytes = s.as_bytes();
+
+//     for (i, &item) in bytes.iter().enumerate() {
+//         if item == b' ' {
+//             return i;
+//         }
+//     }
+//     s.len()
+// }
