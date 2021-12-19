@@ -66,6 +66,16 @@ fn main() {
     // change(&mut s1);
     // println!("{}", s1);
 
+    // let mut st = String::from("HI");
+    // let r1 = &mut st;
+    // let r2 = &mut st;
+    // reference(r1);
+    // reference(r2);
+
+    // fn reference(st: &mut String) {
+    //     println!("{} ", st);
+    // }
+
     /*
     The Slice Type
      */
