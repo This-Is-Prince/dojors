@@ -1,0 +1,7 @@
+[package]
+name = "hello-world"
+version = "0.1.0"
+authors = ["Prince <this.is.kumar.prince@gmail.com>"]
+edition = "2021"
+
+[dependencies]
