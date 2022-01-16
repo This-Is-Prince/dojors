@@ -1,37 +1,147 @@
 #[allow(dead_code)]
+
 enum Color {
     Red,
     Green,
     Blue,
-    RgbColor(u8, u8, u8), // tuple
-    CmykColor {
-        cyan: u8,
-        magenta: u8,
-        yellow: u8,
-        black: u8,
-    }, // struct
+    RGB(u8, u8, u8),
+    RGBA(u8, u8, u8, f32),
+    HSL {
+        hue: u16,
+        saturation: u8,
+        lightness: u8,
+    },
 }
 
 fn enums() {
-    let c = Color::CmykColor {
-        cyan: 2,
-        magenta: 0,
-        yellow: 222,
-        black: 0,
+    let color1 = Color::RGB(0, 25, 0);
+    let color2 = Color::RGBA(0, 25, 220, 0.5);
+    let color3 = Color::HSL {
+        hue: 0,
+        saturation: 100,
+        lightness: 50,
     };
-    match c {
-        Color::Red => println!("r"),
-        Color::Green => println!("g"),
-        Color::Blue => println!("b"),
-        Color::RgbColor(0, 0, 0)
-        | Color::CmykColor {
-            cyan: _,
-            magenta: _,
-            yellow: _,
-            black: 0,
-        } => println!("Black"),
-        Color::RgbColor(r, g, b) => println!("rgb({}, {}, {})", r, g, b),
-        _ => println!("other color"),
+    let color4 = Color::HSL {
+        hue: 120,
+        saturation: 100,
+        lightness: 50,
+    };
+    match color4 {
+        Color::Red => {
+            println!("color is Red");
+        }
+        Color::Green => {
+            println!("color is Green");
+        }
+        Color::Blue => {
+            println!("color is Blue");
+        }
+        Color::RGB(r, g, b) => {
+            println!("color is rgb({}, {}, {})", r, g, b);
+        }
+        Color::RGBA(r, g, b, a) => {
+            println!("color is rgba({}, {}, {}, {})", r, g, b, a);
+        }
+        Color::HSL {
+            hue: 0,
+            saturation: 100,
+            lightness: 50,
+        } => {
+            println!("color is hsl(0, 100, 50) which means red");
+        }
+        Color::HSL {
+            hue,
+            saturation,
+            lightness,
+        } => {
+            println!("color is hsl({}, {}, {})", hue, saturation, lightness);
+        }
+    }
+    match color3 {
+        Color::Red => {
+            println!("color is Red");
+        }
+        Color::Green => {
+            println!("color is Green");
+        }
+        Color::Blue => {
+            println!("color is Blue");
+        }
+        Color::RGB(r, g, b) => {
+            println!("color is rgb({}, {}, {})", r, g, b);
+        }
+        Color::RGBA(r, g, b, a) => {
+            println!("color is rgba({}, {}, {}, {})", r, g, b, a);
+        }
+        Color::HSL {
+            hue: 0,
+            saturation: 100,
+            lightness: 50,
+        } => {
+            println!("color is hsl(0, 100, 50) which means red");
+        }
+        Color::HSL {
+            hue,
+            saturation,
+            lightness,
+        } => {
+            println!("color is hsl({}, {}, {})", hue, saturation, lightness);
+        }
+    }
+    match color1 {
+        Color::Red => {
+            println!("color is Red");
+        }
+        Color::Green => {
+            println!("color is Green");
+        }
+        Color::Blue => {
+            println!("color is Blue");
+        }
+        Color::RGB(r, g, b) => {
+            println!("color is rgb({}, {}, {})", r, g, b);
+        }
+        Color::RGBA(r, g, b, a) => {
+            println!("color is rgba({}, {}, {}, {})", r, g, b, a);
+        }
+        Color::HSL {
+            hue: 0,
+            saturation: 100,
+            lightness: 50,
+        } => {
+            println!("color is hsl(0, 100, 50) which means red");
+        }
+        Color::HSL {
+            hue,
+            saturation,
+            lightness,
+        } => {
+            println!("color is hsl({}, {}, {})", hue, saturation, lightness);
+        }
+    }
+    match color2 {
+        Color::Red => {
+            println!("color is Red");
+        }
+        Color::Green => {
+            println!("color is Green");
+        }
+        Color::Blue => {
+            println!("color is Blue");
+        }
+        Color::RGB(r, g, b) => {
+            println!("color is rgb({}, {}, {})", r, g, b);
+        }
+        Color::RGBA(r, g, b, a) => {
+            println!("color is rgba({}, {}, {}, {})", r, g, b, a);
+        }
+        Color::HSL {
+            hue,
+            saturation,
+            lightness,
+        } => {
+            println!("color is hsl({}, {}, {})", hue, saturation, lightness);
+        }
     }
 }
 
