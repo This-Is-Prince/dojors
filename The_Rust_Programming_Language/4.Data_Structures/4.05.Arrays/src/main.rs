@@ -47,6 +47,18 @@ fn array() {
     print_array_with_for(&b);
 
     println!("b took up {} bytes", std::mem::size_of_val(&b));
+
+    let mtx: [[f32; 3]; 2] = [[1.0, 0.0, 0.0], [0.0, 2.0, 0.0]];
+
+    println!("{:?}", mtx);
+
+    for i in 0..mtx.len() {
+        for j in 0..mtx[i].len() {
+            if i == j {
+                println!("mtx[{}][{}] = {}", i, j, mtx[i][j]);
+            }
+        }
+    }
 }
 
 fn main() {
