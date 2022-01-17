@@ -12,16 +12,24 @@ fn closures() {
     println!("{} + 1 = {}", a, plus_one(a));
 
     let mut two = 2;
-    {
-        let plus_two = |x| {
-            let mut z = x;
-            z += two;
-            z
-        };
-        println!("{} + 2 = {}", 3, plus_two(3));
-    }
 
-    let borrow_two = &mut two;
+    let plus_two = |x| {
+        let mut z = x;
+        z += two;
+        z
+    };
+    println!("{} + 2 = {}", 3, plus_two(3));
+    let borrow_tow = &mut two;
+    // println!("two = {} ", two);
+    println!("borrow_two = {} ", borrow_tow);
+
+    // T: by value
+    // T&
+    // &mut
+    let plus_three = |x: &mut i32| *x += 3;
+    let mut f = 12;
+    plus_three(&mut f);
+    println!("f = {}", f);
 }
 
 fn main() {
