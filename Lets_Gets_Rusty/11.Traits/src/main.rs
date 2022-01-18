@@ -7,16 +7,20 @@ use std::fmt::Display;
     // --snip
 } */
 
+#[allow(dead_code)]
 struct Pair<T> {
     x: T,
     y: T,
 }
 
+#[allow(dead_code)]
 impl<T> Pair<T> {
     fn new(x: T, y: T) -> Self {
         Self { x, y }
     }
 }
+
+#[allow(dead_code)]
 impl<T: Display + PartialOrd> Pair<T> {
     fn cmp_display(&self) {
         if self.x >= self.y {
@@ -68,6 +72,7 @@ impl Summary for Tweet {
     }
 }
 
+#[allow(dead_code)]
 fn returns_summarizable() -> impl Summary {
     Tweet {
         username: String::from("horse_ebooks"),
@@ -85,23 +90,35 @@ pub fn notify<T: Summary>(item: &T) {
     println!("Breaking news! {}", item.summarize());
 }
 
+#[allow(unused_variables)]
 pub fn notify2(item1: &impl Summary, item2: &impl Summary) {
     // ...
 }
+
+#[allow(unused_variables)]
 pub fn notify_2(item1: &(impl Summary + Display), item2: &impl Summary) {
     // ...
 }
+
+#[allow(unused_variables)]
 pub fn notify3<T: Summary>(item1: &T, item2: &T) {
     // ...
 }
+
+#[allow(unused_variables)]
 pub fn notify_3<T: Summary + Display>(item1: &T, item2: &T) {
     // ...
 }
 
+#[allow(unused_variables)]
+#[allow(dead_code)]
 fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
     //...
     10
 }
+
+#[allow(dead_code)]
+#[allow(unused_variables)]
 fn some_function_improved<T, U>(t: &T, u: &U) -> i32
 where
     T: Display + Clone,
