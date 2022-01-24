@@ -119,5 +119,5 @@ where
     }
 }
 fn main() {
-    compare_and_display("Listen up!", 9, 8);
+    println!("{:?}", compare_and_display("Listen up!", 9, 8))
 }
