@@ -20,18 +20,19 @@ impl<'a> StrSplit<'a> {
 impl<'a> Iterator for StrSplit<'a> {
     type Item = &'a str;
     fn next(&mut self) -> Option<Self::Item> {
+        let remainder = self.remainder.as_mut()?;
         // if let Some(remainder) = &mut self.remainder {
-        if let Some(ref mut remainder) = self.remainder {
-            if let Some(next_delim) = remainder.find(self.delimiter) {
-                let until_delimiter = &remainder[..next_delim];
-                *remainder = &remainder[(next_delim + self.delimiter.len())..];
-                Some(until_delimiter)
-            } else {
-                self.remainder.take()
-            }
+        // if let Some(ref mut remainder) = self.remainder {
+        if let Some(next_delim) = remainder.find(self.delimiter) {
+            let until_delimiter = &remainder[..next_delim];
+            *remainder = &remainder[(next_delim + self.delimiter.len())..];
+            Some(until_delimiter)
         } else {
-            None
+            self.remainder.take()
         }
+        // } else {
+        //     None
+        // }
     }
 }
 
