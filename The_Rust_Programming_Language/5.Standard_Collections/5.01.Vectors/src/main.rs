@@ -1,46 +1,64 @@
 fn vectors() {
+    // !!!!!REMINDER VARIABLES ARE ALWAYS IMMUTABLE IN RUST
+    // let a = Vec::new();
+    // a.push(1); // Error
+
     let mut a = Vec::new();
     a.push(1);
     a.push(2);
     a.push(3);
 
+    // println!("a = {:#?}", a);
     println!("a = {:?}", a);
-
     a.push(44);
-
+    // println!("a = {:#?}", a);
     println!("a = {:?}", a);
 
-    // usize isize
-    // let idx: usize = a.len() - 1;
-    let idx: usize = 0;
+    println!("a[0] = {}", a[0]);
 
+    // usize, isize
+    // let idx: i32 = 0;
+    // println!("a[0] = {}", a[idx]); //Error, index must be of type usize in rust
+    let idx: usize = 0;
+    println!("a[0] = {}", a[idx]);
     a[idx] = 312;
     println!("a[0] = {}", a[idx]);
 
-    // Option
-    match a.get(3) {
-        Some(x) => println!("a[3] = {}", x),
+    // let idx: usize = 111;
+    // println!("a[0] = {}", a[idx]); // panic at compile time
+
+    // Another safer method
+    // get method returns Option type two possible value Some(value) or None
+    let mut idx = 6;
+    match a.get(idx) {
+        Some(x) => println!("a[{1}] = {}", x, idx),
+        None => println!("error, no such element"),
+    }
+    idx = 3;
+    match a.get(idx) {
+        Some(x) => println!("a[{1}] = {}", x, idx),
         None => println!("error, no such element"),
     }
 
     for x in &a {
         println!("{}", x);
     }
-
-    a.push(77);
+    a.push(44);
     println!("{:?}", a);
 
-    // Some(77)
-    let last_elm = a.pop(); // Option
-    println!("last elem is {:?},  a = {:?}", last_elm, a);
-    // match last_elm {
-    //     Some(x) => println!("{}", x),
-    //     None => println!("no element"),
-    // }
-
-    while let Some(x) = a.pop() {
-        println!("x = {}", x);
+    // Removing Elements
+    let last_elem = &mut a.pop(); // pop returns Option
+    match last_elem {
+        Some(v) => {
+            println!("last element is {}", v);
+            *v = 111;
+            println!("last element is {}", v);
+        }
+        None => {
+            println!("there is no last element")
+        }
     }
+    println!("{:?}", a);
 }
 
 fn main() {
