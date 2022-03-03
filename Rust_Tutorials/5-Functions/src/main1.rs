@@ -51,6 +51,10 @@ pub fn main1() {
         "After passing in the pass_by_mutable_reference function value is :- {}",
         param_a
     );
+
+    let mut param_a: i32 = 200;
+    let mut param_b: i32 = 400;
+    pass_by_mutable_reference_and1(&mut param_a, &mut param_b)
 }
 
 #[allow(unused_variables)]
@@ -99,4 +103,18 @@ fn pass_by_mutable_reference(param_a: &mut i32) {
         "after changing param_a, in pass_by_immutable_reference :- {}",
         param_a
     );
+}
+
+fn pass_by_mutable_reference_and1<'a>(mut param_a: &'a mut i32, param_b: &'a mut i32) {
+    println!(
+        "This function is pass_by_immutable_reference :- {}",
+        param_a
+    );
+    *param_a = 0;
+    println!(
+        "after changing param_a, in pass_by_immutable_reference :- {}",
+        param_a
+    );
+    param_a = param_b;
+    println!("after assigning param_b to param_a :- {}", param_a);
 }
