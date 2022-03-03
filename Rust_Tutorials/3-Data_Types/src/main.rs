@@ -1,6 +1,8 @@
+mod main1;
+
 #[allow(unused_variables)]
 #[allow(unused_assignments)]
-
+#[allow(dead_code)]
 fn main() {
     // by default variable are immutable in rust
     // let some_data: bool = true; //or false
@@ -32,5 +34,6 @@ fn main() {
 
     // let some_data: f32 = 10.; // Don't forget the dot somewhere in the number
 
-    let some_char: char = 'a'; // More than just ascii!!
+    // let some_char: char = 'a'; // More than just ascii!!
+    main1::main1();
 }
