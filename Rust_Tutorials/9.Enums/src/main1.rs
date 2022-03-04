@@ -1,4 +1,4 @@
-#[allow(dead_code)]
+// #[allow(dead_code)]
 enum Payment {
     Cash(f32),
     CreditCard(String, f32),
@@ -6,17 +6,14 @@ enum Payment {
     Crypto { account_id: String, amount: f32 },
 }
 
-#[allow(dead_code)]
 struct DebitData {
-    card_number: String,
-    amount: f32,
+    pub card_number: String,
+    pub amount: f32,
 }
 
-#[allow(dead_code)]
-#[allow(dead_code)]
 #[allow(unused_variables)]
 fn main() {
-    println!("----------Enums----------");
+    println!("------------Enums------------");
 
     let some_payment = Payment::Cash(100.);
     process_payment(some_payment);
@@ -42,23 +39,25 @@ fn process_payment(some_payment: Payment) {
         Payment::Cash(amt) => {
             println!("Paying with cash... in the amount of {}", amt);
         }
-        Payment::CreditCard(card_number, amt) => {
+        Payment::CreditCard(some_string, some_f32) => {
             println!(
-                "Paying with Credit card... card_number {}, amount {}",
-                card_number, amt
+                "Paying with credit card... some_string {}, some_f32 {}",
+                some_string, some_f32
             );
         }
-        Payment::DebitCard(debit_data) => {
+        Payment::DebitCard(data) => {
             println!(
-                "Paying with Debit card... card_number {}, amount {}",
-                debit_data.card_number, debit_data.amount
+                "Paying with debit... card_number {}, amount {}",
+                data.card_number, data.amount
             );
         }
         Payment::Crypto { account_id, amount } => {
             println!(
-                "Paying with Crypto... account_id {}, amount {}",
+                "Paying with crypto... account_id {}, amount {}",
                 account_id, amount
             );
-        }
+        } // _ => {
+          //     println!("Other Payment Method")
+          // }
     }
 }
