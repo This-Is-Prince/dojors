@@ -2,7 +2,7 @@ pub trait SomeTrait {
     fn is_valid(&self) -> bool;
 }
 
-#[derive(Debug)]
+#[derive(Debug, Copy, Clone)]
 pub struct RandomInfo {
     pub call_count: i64,
     pub some_bool: bool,
@@ -23,6 +23,7 @@ impl RandomInfo {
             some_int: 0,
         }
     }
+
     pub fn is_smaller(&mut self, compare_to: i64) -> bool {
         self.call_count += 1;
         self.some_int < compare_to
@@ -40,6 +41,6 @@ struct Pair<T, U> {
     z: U,
 }
 
-// Tuple Struct
+// Tuple struct
 #[allow(dead_code)]
 struct Color(u8, u8, u8);

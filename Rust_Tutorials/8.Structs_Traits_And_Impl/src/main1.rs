@@ -10,39 +10,38 @@ struct PrinceData {
     random: RandomInfo,
 }
 
-impl SomeTrait for PrinceData {
-    fn is_valid(&self) -> bool {
-        self.some_bool
-    }
-}
-
 impl RandomInfo {
     pub fn is_larger(&self, compare_to: i64) -> bool {
         self.some_int > compare_to
     }
 }
 
+impl SomeTrait for PrinceData {
+    fn is_valid(&self) -> bool {
+        true
+    }
+}
+
 fn print_if_is_valid(check_me: &dyn SomeTrait) {
     if check_me.is_valid() {
-        println!("Yay!")
+        println!("Yay!");
     }
 }
 
 impl Default for PrinceData {
     fn default() -> Self {
         Self {
+            some_bool: true,
+            some_float: 10.3,
+            some_int: 80,
             random: RandomInfo::new(true),
-            some_bool: false,
-            some_float: 0.0,
-            some_int: 0,
         }
     }
 }
 
-#[allow(dead_code)]
 #[allow(unused_variables)]
 fn main() {
-    println!("------------Structs Traits and Impl------------");
+    println!("---------Structs, Traits and Impl---------");
 
     let mut random_info_var = RandomInfo {
         call_count: 0,
@@ -50,16 +49,15 @@ fn main() {
         some_int: 10,
     };
 
-    let prince_var = PrinceData {
-        some_bool: true,
-        some_float: 10.3,
-        some_int: 80,
-        random: RandomInfo {
-            call_count: 0,
-            some_bool: false,
-            some_int: 90,
-        },
-    };
+    // let mut prince_var = PrinceData {
+    //     some_bool: true,
+    //     some_float: 10.3,
+    //     some_int: 80,
+    //     random: RandomInfo {
+    //         some_bool: false,
+    //         some_int: 90,
+    //     },
+    // };
 
     let is_this_smaller = random_info_var.is_smaller(9);
     let is_this_larger = random_info_var.is_larger(20);
@@ -67,7 +65,7 @@ fn main() {
 
     let mut prince_var = PrinceData {
         some_bool: true,
-        some_float: 10.2,
+        some_float: 10.3,
         some_int: 80,
         random: RandomInfo::new(true),
     };
