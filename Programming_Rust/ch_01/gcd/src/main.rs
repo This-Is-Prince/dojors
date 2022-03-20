@@ -1,3 +1,7 @@
+use std::env;
+use std::str::FromStr;
+
+#[allow(dead_code)]
 fn gcd(mut n: u64, mut m: u64) -> u64 {
     assert!(n != 0 && m != 0);
     while m != 0 {
@@ -19,5 +23,33 @@ fn test_gcd() {
 }
 
 fn main() {
-    println!("Greatest Common Divisor of 2 and 4 is {}", gcd(2, 4));
+    let mut numbers = Vec::new();
+
+    for arg in env::args().skip(1) {
+        let v: Vec<&str> = arg.split(",").collect();
+        assert!(v.len() == 2);
+        numbers.push(u64::from_str(&v[0]).expect("error parsing argument"));
+        numbers.push(u64::from_str(&v[1]).expect("error parsing argument"));
+    }
+
+    if numbers.len() == 0 {
+        eprintln!("Usage: gcd NUMBER ...");
+        std::process::exit(1);
+    }
+
+    let mut index = 0;
+    loop {
+        let first = numbers[index];
+        let second = numbers[index + 1];
+        println!(
+            "The greatest common divisor of {} and {} is {}",
+            first,
+            second,
+            gcd(first, second)
+        );
+        index += 2;
+        if index >= numbers.len() {
+            break;
+        }
+    }
 }
