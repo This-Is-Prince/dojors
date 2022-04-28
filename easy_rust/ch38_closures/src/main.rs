@@ -193,28 +193,174 @@ fn main() {
     println!("{:?}", empty_vec);
 
     let first_try = vec![
-        Some("success!"),
+        Some("success! 1"),
         None,
-        Some("success!"),
-        Some("success!"),
+        Some("success! 1"),
+        Some("success! 1"),
         None,
     ];
     let second_try = vec![
         None,
-        Some("success!"),
-        Some("success!"),
-        Some("success!"),
-        Some("success!"),
+        Some("success! 2"),
+        Some("success! 2"),
+        Some("success! 2"),
+        Some("success! 2"),
     ];
     let third_try = vec![
-        Some("success!"),
-        Some("success!"),
-        Some("success!"),
-        Some("success!"),
+        Some("success! 3"),
+        Some("success! 3"),
+        Some("success! 3"),
+        Some("success! 3"),
         None,
     ];
 
     for i in 0..first_try.len() {
         println!("{:?}", first_try[i].and(second_try[i]).and(third_try[i]));
     }
+
+    let char_vec = ('a'..'働').collect::<Vec<char>>();
+    in_char_vec(&char_vec, 'i');
+    in_char_vec(&char_vec, '뷁');
+    in_char_vec(&char_vec, '鑿');
+
+    let smaller_vec = ('A'..'z').collect::<Vec<char>>();
+    println!(
+        "All alphabetic? {}",
+        smaller_vec.iter().all(|&x| x.is_alphabetic())
+    );
+    println!(
+        "All less than the character 행? {}",
+        smaller_vec.iter().all(|&x| x < '행')
+    );
+
+    let mut big_vec = vec![6; 1000];
+    big_vec.push(5);
+
+    let mut iterator = big_vec.iter().rev();
+    println!("{:?}", iterator.next());
+    println!("{:?}", iterator.next());
+
+    let num_vec = vec![10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+    println!("{:?}", num_vec.iter().find(|&number| number % 3 == 0)); // find takes a reference, so we give it &number
+    println!("{:?}", new_vec.iter().find(|&number| number * 2 == 30));
+
+    println!("{:?}", num_vec.iter().position(|&number| number % 3 == 0));
+    println!("{:?}", new_vec.iter().position(|&number| number * 2 == 30));
+
+    let even_odd = vec!["even", "odd"];
+    let even_odd_vec = (0..6)
+        .zip(even_odd.into_iter().cycle())
+        .collect::<Vec<(_, _)>>();
+    println!("{:?}", even_odd_vec);
+
+    let ten_chars = ('a'..).take(10).collect::<Vec<char>>();
+    let skip_then_ten_chars = ('a'..).skip(1300).take(10).collect::<Vec<char>>();
+    println!("{:?}", ten_chars);
+    println!("{:?}", skip_then_ten_chars);
+
+    let some_numbers = vec![1, 2, 3, 4, 5];
+    println!(
+        "{}",
+        some_numbers
+            .iter()
+            .fold(1, |total_so_far, next_number| total_so_far * next_number)
+    );
+
+    let a_string = "I don't have any dashes in me.";
+    println!(
+        "{}",
+        a_string
+            .chars()
+            .fold("-".to_string(), |mut string_so_far, next_char| {
+                // Start with a String "-". Bring it in as mutable each time along with the next char
+                string_so_far.push(next_char); // Push the char on, then '-'
+                string_so_far.push('-');
+                string_so_far // Don't forget to pass it on to the next loop
+            })
+    );
+
+    let num_vec = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+    for chunk in num_vec.chunks(3) {
+        println!("{:?}", chunk);
+    }
+    for window in num_vec.windows(3) {
+        println!("{:?}", window);
+    }
+
+    let rules = "Rule number 1: No fighting. Rule number 2: Go to bed at 8 pm. Rule number 3: Wake up at 6 am.";
+    let rule_locations = rules.match_indices("Rule").collect::<Vec<(_, _)>>(); // This is Vec<usize, &str> but we just tell Rust to do it
+    println!("{:?}", rule_locations);
+
+    let just_numbers = vec![1, 5, 100];
+    let mut number_iter = just_numbers.iter().peekable(); // This actually creates a type of iterator called Peekable
+
+    for _ in 0..3 {
+        println!("I love the number {}", number_iter.peek().unwrap());
+        println!("I really love the number {}", number_iter.peek().unwrap());
+        println!("{} is such a nice number", number_iter.peek().unwrap());
+        number_iter.next();
+    }
+
+    let locations = vec![
+        ("Nevis", 25),
+        ("Taber", 8428),
+        ("Markerville", 45),
+        ("Cardston", 3585),
+    ];
+    let mut location_iter = locations.iter().peekable();
+    while location_iter.peek().is_some() {
+        match location_iter.peek() {
+            Some((name, number)) if *number < 100 => {
+                println!("Found a hamlet: {} with {} people", name, number);
+            }
+            Some((name, number)) => println!("Found a town: {} with {} people", name, number),
+            None => break,
+        }
+        location_iter.next();
+    }
+
+    let vec_of_names = vec![
+        "Caesar",
+        "Frodo Baggins",
+        "Bilbo Baggins",
+        "Jean-Luc Picard",
+        "Data",
+        "Rand Al'Thor",
+        "Paul Atreides",
+        "Barack Hussein Obama",
+        "Bill Jefferson Clinton",
+    ];
+    let mut iter_of_names = vec_of_names.iter().peekable();
+    let mut all_names = Names {
+        // start an empty Names struct
+        one_word: vec![],
+        two_words: vec![],
+        three_words: vec![],
+    };
+
+    while iter_of_names.peek().is_some() {
+        let next_item = iter_of_names.next().unwrap(); // We can use .unwrap() because we it is Some
+        match next_item.match_indices(' ').collect::<Vec<_>>().len() {
+            // Create a quick vec using .match_indices and check the length
+            0 => all_names.one_word.push(next_item.to_string()),
+            1 => all_names.two_words.push(next_item.to_string()),
+            _ => all_names.three_words.push(next_item.to_string()),
+        }
+    }
+    println!("{:?}", all_names);
+}
+
+fn in_char_vec(char_vec: &Vec<char>, check: char) {
+    println!(
+        "Is {} inside? {}",
+        check,
+        char_vec.iter().any(|&character| character == check)
+    );
+}
+
+#[derive(Debug)]
+struct Names {
+    one_word: Vec<String>,
+    two_words: Vec<String>,
+    three_words: Vec<String>,
 }
