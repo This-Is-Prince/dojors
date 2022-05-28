@@ -1,4 +1,4 @@
-# Learning Rust
+# Learning Rust From Different Resources (YT Videos, Articles, Courses etc.)
 
 ## Books
 - [Programming Rust](https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/)
