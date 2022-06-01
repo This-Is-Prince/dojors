@@ -5,3 +5,6 @@
 
 ## Articles
 - [Easy Rust](https://dhghomon.github.io/easy_rust/Chapter_0.html)
+
+## Video Tutorials
+- [Rust Programming Language by Tech With Tim](https://youtube.com/playlist?list=PLzMcBGfZo4-nyLTlSRBvo0zjSnCnqjHYQ)
