@@ -4,13 +4,20 @@ mod restaurant;
 use crate::restaurant::order_food;
 
 use core::num;
-use rand::Rng;
+use rand::{thread_rng, Rng};
 use std::cmp::Ordering;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader, ErrorKind, Write};
 
 use std::collections::HashMap;
 use std::ops::Add;
+
+use std::thread;
+use std::time::Duration;
+
+use std::cell::RefCell;
+use std::rc::Rc;
+use std::sync::{Arc, Mutex};
 
 fn main() {
     // println!("What is your name?");
@@ -304,40 +311,180 @@ fn main() {
 
     // panic!("Terrible Error");
 
-    let path = "lines.txt";
-    let output = File::create(path);
+    // let path = "lines.txt";
+    // let output = File::create(path);
 
-    let mut output = match output {
-        Ok(file) => file,
-        Err(err) => panic!("{}", err),
-    };
+    // let mut output = match output {
+    //     Ok(file) => file,
+    //     Err(err) => panic!("{}", err),
+    // };
 
-    write!(output, "Just Some\nRandom words").expect("Failed to write to file");
+    // write!(output, "Just Some\nRandom words").expect("Failed to write to file");
 
-    let input = File::open(path).unwrap();
-    let buffered = BufReader::new(input);
+    // let input = File::open(path).unwrap();
+    // let buffered = BufReader::new(input);
 
-    for line in buffered.lines() {
-        // match line {
-        //     Ok(str) => println!("{}", str),
-        //     Err(err) => panic!("{}", err),
-        // }
+    // for line in buffered.lines() {
+    //     // match line {
+    //     //     Ok(str) => println!("{}", str),
+    //     //     Err(err) => panic!("{}", err),
+    //     // }
 
-        println!("{}", line.unwrap());
+    //     println!("{}", line.unwrap());
+    // }
+
+    // let output2 = File::create("rand.txt");
+
+    // let output2 = match output2 {
+    //     Ok(file) => file,
+    //     Err(err) => match err.kind() {
+    //         ErrorKind::NotFound => match File::create("rand.txt") {
+    //             Ok(fc) => fc,
+    //             Err(e) => panic!("Can't create file: {:?}", e),
+    //         },
+    //         _other_error => panic!("Problem opening file : {:?}", _other_error),
+    //     },
+    // };
+
+    // let mut arr_it = [1, 2, 3, 4];
+    // for val in arr_it.iter() {
+    //     println!("{}", val);
+    // }
+
+    // let mut iter1 = arr_it.iter();
+
+    // println!("1st : {:?}", iter1.next());
+
+    // let can_vote = |age: i32| age >= 18;
+    // println!("Can vote : {}", can_vote(8));
+
+    // let mut sample1 = 5;
+    // let print_var = || println!("Sample1 = {}", sample1);
+    // print_var();
+
+    // sample1 = 10;
+    // // print_var();
+    // let mut change_var = || sample1 += 1;
+    // change_var();
+    // println!("sample1 = {}", sample1);
+    // sample1 = 10;
+    // println!("sample1 = {}", sample1);
+
+    // fn get_func(s: String) -> Box<dyn Fn() -> ()> {
+    //     let var = 5;
+
+    //     Box::new(move || println!("{} {}", s, var))
+    // }
+    // get_func("This is".to_string())();
+
+    // fn use_func<T>(a: i32, b: i32, func: T) -> i32
+    // where
+    //     T: Fn(i32, i32) -> i32,
+    // {
+    //     func(a, b)
+    // }
+
+    // let sum = |a, b| a + b;
+    // let prod = |a, b| a * b;
+    // println!("5 + 4 = {}", use_func(5, 4, sum));
+    // println!("5 * 4 = {}", use_func(5, 4, prod));
+
+    // let b_int1 = Box::new(10);
+    // println!("b_int1 = {}", b_int1);
+
+    // struct TreeNode<T> {
+    //     pub left: Option<Box<TreeNode<T>>>,
+    //     pub right: Option<Box<TreeNode<T>>>,
+    //     pub key: T,
+    // }
+
+    // impl<T> TreeNode<T> {
+    //     pub fn new(key: T) -> Self {
+    //         Self {
+    //             left: None,
+    //             right: None,
+    //             key,
+    //         }
+    //     }
+    //     pub fn left(mut self, node: TreeNode<T>) -> Self {
+    //         self.left = Some(Box::new(node));
+    //         self
+    //     }
+    //     pub fn right(mut self, node: TreeNode<T>) -> Self {
+    //         self.right = Some(Box::new(node));
+    //         self
+    //     }
+    // }
+
+    // let node1 = TreeNode::new(1)
+    //     .left(TreeNode::new(2))
+    //     .right(TreeNode::new(3));
+
+    // let thread1 = thread::spawn(|| {
+    //     for i in 1..25 {
+    //         println!("Spawned thread: {}", i);
+    //         thread::sleep(Duration::from_millis(1));
+    //     }
+    // });
+
+    // for i in 1..20 {
+    //     println!("Main thread: {}", i);
+    //     thread::sleep(Duration::from_millis(1));
+    // }
+
+    // thread1.join().unwrap();
+
+    // pub struct Bank {
+    //     balance: f32,
+    // }
+    // fn withdraw(the_bank: &mut Bank, amt: f32) {
+    //     the_bank.balance -= amt;
+    // }
+
+    // let mut bank = Bank { balance: 100.0 };
+    // withdraw(&mut bank, 5.00);
+    // println!("Balance : {}", bank.balance);
+
+    // fn customer(the_bank: &mut Bank) {
+    //     withdraw(the_bank, 5.00);
+    // }
+    // thread::spawn(|| customer(&mut bank)).join().unwrap();
+
+    pub struct Bank {
+        balance: f32,
     }
 
-    let output2 = File::create("rand.txt");
+    fn withdraw(the_bank: &Arc<Mutex<Bank>>, amt: f32) {
+        let mut bank_ref = the_bank.lock().unwrap();
+        if bank_ref.balance < 5.00 {
+            println!(
+                "Current Balance : {} Withdrawal a smaller amount",
+                bank_ref.balance
+            );
+        } else {
+            bank_ref.balance -= amt;
+            println!(
+                "Customer withdrew  {} Current Balance {}",
+                amt, bank_ref.balance
+            );
+        }
+    }
+    fn customer(the_bank: Arc<Mutex<Bank>>) {
+        withdraw(&the_bank, 5.00);
+    }
+    let bank = Arc::new(Mutex::new(Bank { balance: 20.00 }));
 
-    let output2 = match output2 {
-        Ok(file) => file,
-        Err(err) => match err.kind() {
-            ErrorKind::NotFound => match File::create("rand.txt") {
-                Ok(fc) => fc,
-                Err(e) => panic!("Can't create file: {:?}", e),
-            },
-            _other_error => panic!("Problem opening file : {:?}", _other_error),
-        },
-    };
+    let handles = (0..10).map(|_| {
+        let bank_ref = bank.clone();
+        thread::spawn(|| {
+            customer(bank_ref);
+        })
+    });
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+    println!("Total {}", bank.lock().unwrap().balance);
 }
 
 // fn print_str(x: String) {
