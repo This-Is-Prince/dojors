@@ -1,5 +1,8 @@
 #![allow(unused)]
 
+mod restaurant;
+use crate::restaurant::order_food;
+
 use core::num;
 use rand::Rng;
 use std::cmp::Ordering;
@@ -258,44 +261,83 @@ fn main() {
     //     height: 10.5,
     // };
 
-    const PI: f32 = 3.14;
-    trait Shape {
-        fn new(length: f32, width: f32) -> Self;
-        fn area(&self) -> f32;
-    }
-    struct Rectangle {
-        length: f32,
-        width: f32,
+    // const PI: f32 = 3.14;
+    // trait Shape {
+    //     fn new(length: f32, width: f32) -> Self;
+    //     fn area(&self) -> f32;
+    // }
+    // struct Rectangle {
+    //     length: f32,
+    //     width: f32,
+    // }
+
+    // struct Circle {
+    //     length: f32,
+    //     width: f32,
+    // }
+
+    // impl Shape for Rectangle {
+    //     fn new(length: f32, width: f32) -> Rectangle {
+    //         Self { length, width }
+    //     }
+    //     fn area(&self) -> f32 {
+    //         self.length * self.width
+    //     }
+    // }
+
+    // impl Shape for Circle {
+    //     fn new(length: f32, width: f32) -> Circle {
+    //         Self { length, width }
+    //     }
+    //     fn area(&self) -> f32 {
+    //         (self.length / 2.0).powf(2.0) * PI
+    //     }
+    // }
+
+    // let rec: Rectangle = Shape::new(10.0, 10.0);
+    // let cir: Circle = Shape::new(10.0, 10.0);
+
+    // println!("Rec Area : {}", rec.area());
+    // println!("Cir Area : {}", cir.area());
+
+    // order_food();
+
+    // panic!("Terrible Error");
+
+    let path = "lines.txt";
+    let output = File::create(path);
+
+    let mut output = match output {
+        Ok(file) => file,
+        Err(err) => panic!("{}", err),
+    };
+
+    write!(output, "Just Some\nRandom words").expect("Failed to write to file");
+
+    let input = File::open(path).unwrap();
+    let buffered = BufReader::new(input);
+
+    for line in buffered.lines() {
+        // match line {
+        //     Ok(str) => println!("{}", str),
+        //     Err(err) => panic!("{}", err),
+        // }
+
+        println!("{}", line.unwrap());
     }
 
-    struct Circle {
-        length: f32,
-        width: f32,
-    }
+    let output2 = File::create("rand.txt");
 
-    impl Shape for Rectangle {
-        fn new(length: f32, width: f32) -> Rectangle {
-            Self { length, width }
-        }
-        fn area(&self) -> f32 {
-            self.length * self.width
-        }
-    }
-
-    impl Shape for Circle {
-        fn new(length: f32, width: f32) -> Circle {
-            Self { length, width }
-        }
-        fn area(&self) -> f32 {
-            (self.length / 2.0).powf(2.0) * PI
-        }
-    }
-
-    let rec: Rectangle = Shape::new(10.0, 10.0);
-    let cir: Circle = Shape::new(10.0, 10.0);
-
-    println!("Rec Area : {}", rec.area());
-    println!("Cir Area : {}", cir.area());
+    let output2 = match output2 {
+        Ok(file) => file,
+        Err(err) => match err.kind() {
+            ErrorKind::NotFound => match File::create("rand.txt") {
+                Ok(fc) => fc,
+                Err(e) => panic!("Can't create file: {:?}", e),
+            },
+            _other_error => panic!("Problem opening file : {:?}", _other_error),
+        },
+    };
 }
 
 // fn print_str(x: String) {
