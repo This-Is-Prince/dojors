@@ -6,6 +6,9 @@ use std::cmp::Ordering;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader, ErrorKind, Write};
 
+use std::collections::HashMap;
+use std::ops::Add;
+
 fn main() {
     // println!("What is your name?");
     // let mut name = String::new();
@@ -188,4 +191,151 @@ fn main() {
     // }
     // println!("Vec Length {}", vec2.len());
     // println!("Pop : {:?}", vec2.pop());
+
+    // say_hello();
+    // print_sum(4, 6);
+
+    // println!("{} + {} = {}", 4, 7, get_sum(4, 7));
+    // println!("{:?}", get_two_val(64));
+
+    // let num_list = vec![1, 2, 3, 4, 5];
+    // println!("Sum of list = {}", sum_list(&num_list));
+
+    // println!("5 + 4 = {}", get_sum_gen(5, 4));
+    // println!("5.2 + 4.6 = {}", get_sum_gen(5.2, 4.6));
+
+    // let str1 = String::from("World");
+    // let str2 = str1;
+    // println!("Hello {}", str1); // Error, borrow of moved value: `str1`
+
+    // let str2 = str1.clone();
+    // println!("Hello {}", str1);
+    // print_str(str1);
+    // let str3 = print_return_str(str1);
+    // println!("str3 = {}", str3);
+    // let mut str1 = String::from("Prince");
+    // change_string(&mut str1);
+
+    // let mut heroes = HashMap::new();
+    // heroes.insert("Superman", "Clark Kent");
+    // heroes.insert("Batman", "Bruce Wayne");
+    // heroes.insert("Flash", "Barry Allen");
+    // // println!("{:?}", heroes);
+
+    // for (k, v) in heroes.iter() {
+    //     println!("{} = {}", k, v);
+    // }
+
+    // println!("Length : {}", heroes.len());
+
+    // if heroes.contains_key("Batman") {
+    //     let the_batman = heroes.get("Batman");
+    //     match the_batman {
+    //         Some(x) => println!("Batman is a hero"),
+    //         None => println!("Batman is not a hero"),
+    //     }
+    // }
+
+    // struct Customer {
+    //     name: String,
+    //     address: String,
+    //     balance: f32,
+    // }
+    // let mut bob = Customer {
+    //     name: String::from("Bob Smith"),
+    //     address: String::from("555 Main St"),
+    //     balance: 234.50,
+    // };
+    // bob.address = String::from("505 Main St");
+
+    // struct Rectangle<T, U> {
+    //     length: T,
+    //     height: U,
+    // }
+
+    // let rec = Rectangle {
+    //     length: 4,
+    //     height: 10.5,
+    // };
+
+    const PI: f32 = 3.14;
+    trait Shape {
+        fn new(length: f32, width: f32) -> Self;
+        fn area(&self) -> f32;
+    }
+    struct Rectangle {
+        length: f32,
+        width: f32,
+    }
+
+    struct Circle {
+        length: f32,
+        width: f32,
+    }
+
+    impl Shape for Rectangle {
+        fn new(length: f32, width: f32) -> Rectangle {
+            Self { length, width }
+        }
+        fn area(&self) -> f32 {
+            self.length * self.width
+        }
+    }
+
+    impl Shape for Circle {
+        fn new(length: f32, width: f32) -> Circle {
+            Self { length, width }
+        }
+        fn area(&self) -> f32 {
+            (self.length / 2.0).powf(2.0) * PI
+        }
+    }
+
+    let rec: Rectangle = Shape::new(10.0, 10.0);
+    let cir: Circle = Shape::new(10.0, 10.0);
+
+    println!("Rec Area : {}", rec.area());
+    println!("Cir Area : {}", cir.area());
 }
+
+// fn print_str(x: String) {
+//     println!("A string {}", x);
+// }
+
+// fn print_return_str(x: String) -> String {
+//     println!("A string {}", x);
+//     x
+// }
+
+// fn change_string(name: &mut String) {
+//     name.push_str(" is happy");
+//     println!("Message : {}", name);
+// }
+
+// fn get_sum_gen<T: Add<Output = T>>(x: T, y: T) -> T {
+//     x + y
+// }
+
+// fn say_hello() {
+//     println!("Hello");
+// }
+
+// fn print_sum(x: i32, y: i32) {
+//     println!("{} + {} = {}", x, y, x + y);
+// }
+
+// fn get_sum(x: i32, y: i32) -> i32 {
+//     x + y
+// }
+
+// fn get_two_val(x: i32) -> (i32, i32) {
+//     (x + 1, x + 2)
+// }
+
+// fn sum_list(list: &[i32]) -> i32 {
+//     let mut sum = 0;
+//     for &ele in list.iter() {
+//         sum += ele;
+//     }
+//     sum
+// }
