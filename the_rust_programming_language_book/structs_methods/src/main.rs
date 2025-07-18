@@ -21,8 +21,12 @@ fn main() {
     println!("Can rect1 hold rect2:- {}", rectangle1.can_hold(&rectangle2));
     println!("Can rect2 hold rect3:- {}", rectangle2.can_hold(&rectangle3));
     println!("Can rect1 hold rect3:- {}", rectangle1.can_hold(&rectangle3));
+
+    let sq: Rectangle = Rectangle::square(32);
+    println!("{:#?}", sq);
 }
 
+#[derive(Debug)]
 struct Rectangle {
     width: u32,
     height: u32,
@@ -35,5 +39,12 @@ impl Rectangle {
 
     fn can_hold(&self, rect: &Rectangle) -> bool {
         self.width > rect.width && self.height > rect.height
+    }
+
+    fn square(size: u32) -> Self {
+        Self {
+            width: size,
+            height: size,
+        }
     }
 }
