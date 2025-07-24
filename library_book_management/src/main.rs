@@ -351,5 +351,80 @@ fn demonstrate_slices() {
 }
 
 fn main() {
-    println!("Hello, world!");
+    print_library_header();
+
+    demonstrate_variables();
+    demonstrate_data_types();
+    demonstrate_control_flow();
+    demonstrate_ownership();
+    demonstrate_references();
+    demonstrate_slices();
+
+    println!("\n=== Library System in Action ===\n");
+
+    let mut my_library = library::Library::new(LIBRARY_NAME.to_string());
+
+    let book1 = book::Book::new(
+        "978-0-13-110163-0".to_string(),
+        "The Rust Programming Language".to_string(),
+        "Steve Klabnik and Carol Nichols".to_string(),
+        2018
+    );
+
+    let book2 = book::Book::new(
+        "978-1-59-327832-3".to_string(),
+        "Programming Rust".to_string(),
+        "Jim Blandy and Jason Orendorff".to_string(),
+        2017
+    );
+
+    my_library.add_book(book1);
+    my_library.add_book(book2);
+
+    let student_id = my_library.register_member(
+        "Alice Johnson".to_string(),
+        "alice@university.edu".to_string(),
+        member::MemberType::Student { university: "Tech University".to_string() }
+    );
+
+    let senior_id = my_library.register_member(
+        "Bob Smith".to_string(),
+        "bob@email.com".to_string(),
+        member::MemberType::Senior { age: 72 }
+    );
+
+    match my_library.checkout_book("978-0-13-110163-0", student_id) {
+        Ok(()) => println!("✅ Book checked out successfully!"),
+        Err(e) => println!("Checkout failed: {}", e),
+    }
+
+    match my_library.checkout_book("978-0-13-110163-0", senior_id) {
+        Ok(()) => println!("✅ Book checked out successfully!"),
+        Err(e) => println!("❌ Checkout failed: {}", e),
+    }
+
+    match my_library.return_book("978-0-13-110163-0", student_id) {
+        Ok(()) => println!("✅ Book returned successfully!"),
+        Err(e) => println!("❌ Return failed: {}", e),
+    }
+
+    let results = my_library.search_books("rust");
+    println!("\nSearch results for 'rust':");
+    for book in results {
+        book.display_info();
+    }
+
+    if let Some(info) = my_library.get_member_info(student_id) {
+        println!("\nMember info: {}", info);
+    }
+
+    my_library.display_stats();
+
+    let fine = calculate_fine(5, true);
+    println!("\nStudent fine for 5 days late: ${:.2}", fine);
+
+    let (section, shelf, position) = get_book_location(12345);
+    println!("Book location: Section {}, Shelf {}, Position {}", section, shelf, position);
+
+    println!("\n✨ Library system demonstration complete!");
 }
