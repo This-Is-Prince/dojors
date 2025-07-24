@@ -1,7 +1,12 @@
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_imports)]
+#![allow(unused_labels)]
+
 mod book;
-mod member;
-mod loan;
 mod library;
+mod loan;
+mod member;
 
 use std::collections::HashMap;
 
@@ -22,21 +27,21 @@ fn demonstrate_variables() {
     available_books = available_books - 1;
     println!("Available books after: {}", available_books);
 
-    let spaces = "  ";
+    let spaces = "   ";
     let spaces = spaces.len();
     println!("Number of spaces: {}", spaces);
 
     let x = 5;
     let y = x;
     println!("x: {}, y: {}", x, y);
-    
+
     let s1 = String::from("Hello");
     let s2 = s1;
     println!("s2: {}", s2);
 }
 
 fn demonstrate_data_types() {
-    println!("\n === Demonstrating Data Types ===\n");
+    println!("\n=== Demonstrating Data Types ===\n");
 
     let small_number: i8 = -128;
     let medium_number: i32 = 42;
@@ -57,7 +62,7 @@ fn demonstrate_data_types() {
     let mut author = String::from("Steve Klabnik");
     author.push_str(" and Carol Nichols");
     println!("Book: {} by {}", book_title, author);
-    
+
     let book_info: (i32, &str, f64) = (12345, "Programming", 29.99);
     println!("Book ID: {}, Category: {}, Price: ${}", book_info.0, book_info.1, book_info.2);
 
@@ -77,7 +82,6 @@ fn demonstrate_data_types() {
 
     let first_day = weekdays[0];
     let last_day = weekdays[4];
-
     println!("Library open {} to {}", first_day, last_day);
 }
 
@@ -114,11 +118,11 @@ fn is_library_open(hour: u32) -> bool {
 }
 
 fn library_panic(msg: &str) -> ! {
-    panic!("LIBRARY SYSTEM ERROR :{}", msg);
+    panic!("LIBRARY SYSTEM ERROR: {}", msg);
 }
 
 fn demonstrate_control_flow() {
-    println!("\n=== Demonstrating  Control Flow ===\n");
+    println!("\n=== Demonstrating Control Flow ===\n");
 
     let current_hour = 14;
 
@@ -134,7 +138,6 @@ fn demonstrate_control_flow() {
         "Closed"
     };
     println!("Status: {}", status);
-    
 
     let member_age = 65;
     let membership_fee = if member_age < 18 {
@@ -161,12 +164,12 @@ fn demonstrate_control_flow() {
         books_to_process -= 1;
     }
 
-    println!("\nLibrary sections");
+    println!("\n Library sections:");
     for section in 'A'..='E' {
         println!("Section {}", section);
     }
 
-    let popular_genres: [&str; 4] = ["Fiction", "Non-fiction", "Science", "History"];
+    let popular_genres = ["Fiction", "Non-fiction", "Science", "History"];
     for (index, genre) in popular_genres.iter().enumerate() {
         println!("{}. {}", index + 1, genre);
     }
@@ -181,6 +184,7 @@ fn demonstrate_control_flow() {
     }
 
     let book_code = 'B';
+
     let section_name = match book_code {
         'A' => "Arts",
         'B' => "Biography",
@@ -190,9 +194,9 @@ fn demonstrate_control_flow() {
         'S' => "Science",
         _ => "General",
     };
-    println!("\n Book code {} means section: {}", book_code, section_name);
+    println!("\nBook code {} means section: {}", book_code, section_name);
 
-    let book_count: u32 = 15;
+    let book_count = 15;
     match book_count {
         0 => println!("No books"),
         1 => println!("One book"),
@@ -203,7 +207,7 @@ fn demonstrate_control_flow() {
     }
 
     let day = "Saturday";
-    match day  {
+    match day {
         "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" => {
             println!("Library hours: 9 AM - 9 PM");
         }
@@ -214,6 +218,137 @@ fn demonstrate_control_flow() {
     }
 }
 
+fn demonstrate_ownership() {
+    println!("\n=== Demonstrating Ownership ===\n");
+
+    {
+        let book = String::from("1984");
+        println!("Book in scope: {}", book);
+    }
+
+    let s1 = String::from("The Hobbit");
+    let s2 = s1;
+    println!("s2 now owns: {}", s2);
+
+    let s3 = String::from("Dune");
+    let s4 = s3.clone();
+    println!("s3: {}, s4: {}", s3, s4);
+
+    let x = 42;
+    let y = x;
+    println!("x: {}, y: {}", x, y);
+
+    let book = String::from("Harry Potter");
+    take_ownership(book);
+
+    let number = 42;
+    make_copy(number);
+    println!("Number still valid: {}", number);
+
+    let book = give_ownership();
+    println!("Received book: {}", book);
+
+    let book2 = String::from("Foundation");
+    let book3 = take_and_give_back(book2);
+    println!("Got back: {}", book3);
+}
+
+fn take_ownership(book: String) {
+    println!("Taking ownership of: {}", book);
+}
+
+fn make_copy(number: i32) {
+    println!("Got copy of: {}", number);
+}
+
+fn give_ownership() -> String {
+    String::from("Lord of the Rings")
+}
+
+fn take_and_give_back(book: String) -> String {
+    book
+}
+
+fn demonstrate_references() {
+    println!("\n=== References and Borrowing ===\n");
+
+    let book = String::from("Pride and Prejudice");
+
+    let len = calculate_length(&book);
+    println!("'{}' has {} characters", book, len);
+
+    let r1 = &book;
+    let r2 = &book;
+    println!("r1: {}, r2: {}", r1, r2);
+
+    let mut book = String::from("War and Peace");
+    change_book(&mut book);
+    println!("Changed to: {}", book);
+
+    let mut book = String::from("Brave New World");
+    {
+        let r1 = &book;
+        let r2 = &book;
+        println!("r1: {}, r2: {}", r1, r2);
+    }
+
+    let r3 = &mut book;
+    r3.push_str(" - Aldous Huxley");
+    println!("Modified: {}", r3);
+}
+
+fn calculate_length(s: &str) -> usize {
+    s.len()
+}
+
+fn change_book(book: &mut String) {
+    book.push_str(" by Leo Tolstoy");
+}
+
+fn demonstrate_slices() {
+    println!("\n=== The Slice Type ===\n");
+
+    let book_title = String::from("The Great Gatsby by F. Scott Fitzgerald");
+
+    let title = &book_title[0..16];
+    let author = &book_title[20..];
+    let great = &book_title[4..9];
+
+    println!("Title: {}", title);
+    println!("Author: {}", author);
+    println!("Word: {}", great);
+
+    let full_slice = &book_title[..];
+    let from_start = &book_title[..3];
+    let to_end = &book_title[37..];
+
+    let numbers = [1, 2, 3, 4, 5];
+    let middle = &numbers[1..4];
+    println!("Middle numbers: {:?}", middle);
+
+    let book = String::from("Crime and Punishment");
+    let first_word = get_first_word(&book);
+    println!("First word: {}", first_word);
+
+    let literal: &str = "Hello, World!";
+
+    let mut arr = [1, 2, 3, 4, 5];
+    let slice = &mut arr[1..4];
+    slice[0] = 10;
+    println!("Modified array: {:?}", arr);
+
+    fn get_first_word(s: &str) -> &str {
+        let bytes = s.as_bytes();
+
+        for (index, &item) in bytes.iter().enumerate() {
+            if item == b' ' {
+                return &s[..index];
+            }
+        }
+
+        &s[..]
+    }
+}
 
 fn main() {
     println!("Hello, world!");
